@@ -36,7 +36,9 @@ def ml_loop(side: str):
     last_y = 0
     # 2. Inform the game process that ml process is ready
     comm.ml_ready()
-
+    scene_info = comm.get_scene_info()
+    comm.send_instruction(scene_info.frame, PlatformAction.SERVE_TO_LEFT)
+    
     # 3. Start an endless loop
     while True:
         # 3.1. Receive the scene information sent from the game process
