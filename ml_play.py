@@ -7,8 +7,8 @@ def ml_loop(side: str):
     while True:
         scene_info = comm.recv_from_game()
 
-        if scene_info.status == "GAME_1P_WIN" or \
-           scene_info.status == "GAME_2P_WIN":
+        if (scene_info["status"] == "GAME_1P_WIN" or
+            scene_info["status"] == "GAME_2P_WIN"):
             comm.ml_ready()
             continue
 
