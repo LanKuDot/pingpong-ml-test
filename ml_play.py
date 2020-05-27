@@ -1,15 +1,17 @@
-from mlgame.communication import ml as comm
+class MLPlay:
+    def __init__(self, side):
+        self.ball_served = False
+        self.side = side
 
-def ml_loop(side: str):
-    print("For {}".format(side))
-    comm.ml_ready()
+    def update(self, scene_info):
+        if scene_info["status"] != "GAME_ALIVE":
+            return "RESET"
 
-    while True:
-        scene_info = comm.recv_from_game()
+        if not self.ball_served:
+            self.ball_served = True
+            return "SERVE_TO_LEFT"
+        else:
+            return "MOVE_LEFT"
 
-        if (scene_info["status"] == "GAME_1P_WIN" or
-            scene_info["status"] == "GAME_2P_WIN"):
-            comm.ml_ready()
-            continue
-
-        comm.send_to_game({"frame": scene_info["frame"], "command": "MOVE_LEFT"})
+    def reset(self):
+        self.ball_served = False
