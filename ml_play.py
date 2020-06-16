@@ -4,6 +4,9 @@ class MLPlay:
         self.side = side
 
     def update(self, scene_info):
+        """
+        Decide the command according to the received scene information
+        """
         if scene_info["status"] != "GAME_ALIVE":
             return "RESET"
 
