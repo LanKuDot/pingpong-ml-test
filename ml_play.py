@@ -1,5 +1,8 @@
 class MLPlay:
     def __init__(self, side):
+        """
+        Initialization
+        """
         self.ball_served = False
         self.side = side
 
